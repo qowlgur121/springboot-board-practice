@@ -2,6 +2,7 @@ package study.boardpractice.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -61,14 +62,13 @@ public class BoardController {
         return "boardmodify";
     }
 
+    @Transactional
     @PostMapping("/board/update/{id}")
     public String boardUpdate(@PathVariable("id") Long id, Board board) {
 
         Board boardTemp = boardService.boardView(id);
         boardTemp.setTitle(board.getTitle());
         boardTemp.setContent(board.getContent());
-
-        boardService.write(boardTemp);
 
         return "redirect:/board/list";
     }
