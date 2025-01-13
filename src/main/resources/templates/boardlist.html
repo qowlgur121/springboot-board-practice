@@ -18,20 +18,25 @@
     <div class="layout">
         <table>
             <thead>
-                <tr>
-                    <th>글번호</th>
-                    <th>제목</th>
-                </tr>
+            <tr>
+                <th>글번호</th>
+                <th>제목</th>
+            </tr>
             </thead>
             <tbody>
-                <tr th:each="board : ${list}">
-                    <td th:text="${board.id}"></td>
-                    <td>
-                        <a th:text="${board.title}" th:href="@{/board/view(id=${board.id})}"></a>
-                    </td>
-                </tr>
+            <tr th:each="board : ${list}">
+                <td th:text="${board.id}"></td>
+                <td>
+                    <a th:text="${board.title}" th:href="@{/board/view(id=${board.id})}"></a>
+                </td>
+            </tr>
             </tbody>
         </table>
+
+        <th:block th:each="page : ${#numbers.sequence(startPage,endPage)}">
+            <a th:if="${page != nowPage}" th:href="@{/board/list(page=${page - 1})}" th:text="${page}"></a>
+            <strong th:if="${page==nowPage}" th:text ="${page}" style="color:red"></strong>
+        </th:block>
     </div>
 </body>
 </html>

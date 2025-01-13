@@ -2,6 +2,8 @@ package study.boardpractice.service;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import study.boardpractice.domain.Board;
@@ -20,9 +22,9 @@ public class BoardService {
         boardRepository.save(board);
     }
 
-    public List<Board> boardList() {
+    public Page<Board> boardList(Pageable pageable) {
 
-        return boardRepository.findAll();
+        return boardRepository.findAll(pageable);
     }
 
     public Board boardView(Long id) {
