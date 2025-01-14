@@ -6,5 +6,5 @@ import study.boardpractice.domain.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-
+    User findByEmailAndPassword(String email, String password);
 }
